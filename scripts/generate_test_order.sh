@@ -17,12 +17,12 @@ LOG=${OUTPUT_FOLDER}/execution.log
 if [ ! -f ${INPUT_RUN_ORDER_FILE} ]; then echo "Invalid ${INPUT_RUN_ORDER_FILE}"; exit 1; fi
 
 if [ ! -e cp.txt ]; then
-  mvn dependency:build-classpath -DincludeScope=test -Dmdep.outputFile=cp.txt
+  mvn -fn -U -B -Drat.skip=true dependency:build-classpath -DincludeScope=test -Dmdep.outputFile=cp.txt
 fi
 
 
 if [ ! -e $(pwd)/target/classes -o ! -e $(pwd)/target/test-classes ]; then
-  mvn compile test-compile
+  mvn -fn -U -B -Drat.skip=true compile test-compile
 fi
 
 if [ ! -e ${OUTPUT_FOLDER} ]; then
